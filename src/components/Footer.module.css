@@ -1,0 +1,23 @@
+.Attribution {
+  font-size: 0.6rem;
+}
+
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  padding-bottom: 0.4rem;
+  background-color: var(--primary);
+  border-top: 4px solid var(--secondary);
+}
+
+.Item {
+  font-size: 0.9rem;
+}
+
+.Item,
+.Attribution {
+  text-align: center;
+  width: max-content;
+  margin: 0.2rem auto;
+}

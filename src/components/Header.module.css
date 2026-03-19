@@ -1,0 +1,16 @@
+.Wrapper {
+  padding: 1rem;
+  background-color: var(--primary);
+  border-bottom: 4px solid var(--secondary);
+}
+
+.Heading {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.SubHeading {
+  font-size: 1.2rem;
+}
