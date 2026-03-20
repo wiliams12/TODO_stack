@@ -1,10 +1,15 @@
 import styles from "./Task.module.css";
+import type { Task } from "../types";
 
-function Task() {
+interface Props {
+  task: Task;
+}
+
+function Task({ task }: Props) {
   return (
     <div className={styles.Wrapper}>
-      <h2 className={styles.Heading}></h2>
-      <p className={styles.Description}></p>
+      <h2 className={styles.Heading}>{task.title}</h2>
+      <p className={styles.Description}>{task.description}</p>
     </div>
   );
 }

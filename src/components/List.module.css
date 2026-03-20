@@ -6,6 +6,8 @@
   margin: 0;
   justify-content: center;
   height: 100%;
+  width: 80%;
+  margin: auto;
 }
 
 .noTasks {
@@ -15,6 +17,29 @@
 }
 
 .Item {
-  width: 80%;
-  margin: auto;
+  width: 100%;
+}
+
+.HiddenBtn {
+  padding: 0.2rem 0;
+  width: 100%;
+
+  height: max-content;
+
+  max-height: 0;
+  overflow: hidden;
+
+  transition: max-height var(--transition);
+}
+
+.Hidden {
+  visibility: hidden;
+}
+
+.HiddenBtn:hover {
+  max-height: 300px;
+}
+
+.HiddenBtn:hover .Hidden {
+  visibility: visible;
 }

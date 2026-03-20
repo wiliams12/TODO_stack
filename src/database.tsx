@@ -15,7 +15,13 @@ export async function initDB() {
   return await openDB<TaskDB>(DB_NAME, 1, {
     upgrade(db) {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+        const store = db.createObjectStore(STORE_NAME, { keyPath: "id" });
+        store.put({
+          id: "default-task-1",
+          title: "Welcome to TODO Stack! 🎉",
+          description: "create your own tasks and get more productive!",
+          order: 0,
+        });
       }
     },
   });

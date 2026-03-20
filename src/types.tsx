@@ -1,5 +1,6 @@
 export interface Task {
-  text: string;
-  color: string;
+  title: string;
+  description: string;
   id: string;
+  order: number;
 }

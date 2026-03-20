@@ -1,9 +1,16 @@
 .Wrapper {
   text-align: center;
+  background-color: var(--primary);
+  height: 4rem;
+  border: 3px solid var(--secondary);
 }
 
 .Heading {
+  margin: 0;
+  padding: 0;
 }
 
 .Description {
+  margin: 0;
+  padding: 0;
 }

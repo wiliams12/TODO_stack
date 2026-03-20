@@ -3,6 +3,7 @@
   --primary: #4e8d9c;
   --secondary: #85c79a;
   --light: #edf7bd;
+  --transition: 0.2s ease;
 }
 
 html {
@@ -10,6 +11,10 @@ html {
   font-family: "Sono", sans-serif;
   overflow-y: hidden;
   color: var(--light);
+}
+
+html * {
+  box-sizing: border-box;
 }
 
 @media (max-width: 800px) {
