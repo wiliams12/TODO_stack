@@ -54,11 +54,24 @@ function App() {
 
   const handleSaveTask = async (newTask: Task) => {
     try {
-      await storeTask(newTask);
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+      const tasksToShift = tasks.filter((t) => t.order >= newTask.order);
+
+      const shiftPromises = tasksToShift.map((t) =>
+        storeTask({ ...t, order: t.order + 1 }),
+      );
+
+      await Promise.all([...shiftPromises, storeTask(newTask)]);
+
+      setTasks((prevTasks) => {
+        const updatedPrevTasks = prevTasks.map((t) =>
+          t.order >= newTask.order ? { ...t, order: t.order + 1 } : t,
+        );
+        return [...updatedPrevTasks, newTask];
+      });
+
       closeModal();
     } catch (error) {
-      console.error("Failed to save task", error);
+      console.error("Failed to save task and adjust orders", error);
     }
   };
 
