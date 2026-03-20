@@ -5,15 +5,18 @@ import type { Task } from "../types";
 interface Props {
   saveTask: (task: Task) => Promise<void>;
   order: number;
+  title: string;
+  description: string;
+  id: string;
 }
 
-function TaskModal({ saveTask, order }: Props) {
+function TaskModal({ saveTask, order, title, description, id }: Props) {
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const newTask = {
-      id: crypto.randomUUID(),
+      id: id !== "" ? id : crypto.randomUUID(),
       title: formData.get("title") as string,
       description: formData.get("description") as string,
       order: order,
@@ -32,15 +35,17 @@ function TaskModal({ saveTask, order }: Props) {
         name="title"
         placeholder="Task name"
         required
+        defaultValue={title}
       />
       <input
         className={styles.TextField}
         type="text"
         name="description"
         placeholder="Task description"
+        defaultValue={description}
       />
       <button className={styles.Submit} type="submit">
-        Create task
+        Save task
       </button>
     </form>
   );

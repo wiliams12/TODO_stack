@@ -1,5 +1,5 @@
 import { use, useState, useEffect, useMemo } from "react";
-import { getTasks, initDB, storeTask } from "./database";
+import { deleteTask, getTasks, initDB, storeTask } from "./database";
 import { Task } from "./types";
 import styles from "./App.module.css";
 import Header from "./components/Header";
@@ -13,6 +13,10 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [toggledBtn, setToggledBtn] = useState(0);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
     async function setup() {
@@ -44,7 +48,14 @@ function App() {
     return tasksCopy.sort((first, second) => first.order - second.order);
   }, [tasks]);
 
-  const openModal = () => {
+  const openModal = (
+    title: string = "",
+    description: string = "",
+    id: string = "",
+  ) => {
+    setTitle(title);
+    setDescription(description);
+    setId(id);
     setIsModalOpen(true);
   };
 
@@ -54,24 +65,57 @@ function App() {
 
   const handleSaveTask = async (newTask: Task) => {
     try {
-      const tasksToShift = tasks.filter((t) => t.order >= newTask.order);
+      const isEditing = tasks.some((t) => t.id === newTask.id);
 
-      const shiftPromises = tasksToShift.map((t) =>
-        storeTask({ ...t, order: t.order + 1 }),
-      );
+      if (isEditing) {
+        await storeTask(newTask);
 
-      await Promise.all([...shiftPromises, storeTask(newTask)]);
-
-      setTasks((prevTasks) => {
-        const updatedPrevTasks = prevTasks.map((t) =>
-          t.order >= newTask.order ? { ...t, order: t.order + 1 } : t,
+        setTasks((prevTasks) =>
+          prevTasks.map((t) => (t.id === newTask.id ? newTask : t)),
         );
-        return [...updatedPrevTasks, newTask];
-      });
+      } else {
+        const tasksToShift = tasks.filter((t) => t.order >= newTask.order);
+
+        const shiftPromises = tasksToShift.map((t) =>
+          storeTask({ ...t, order: t.order + 1 }),
+        );
+
+        await Promise.all([...shiftPromises, storeTask(newTask)]);
+
+        setTasks((prevTasks) => {
+          const updatedPrevTasks = prevTasks.map((t) =>
+            t.order >= newTask.order ? { ...t, order: t.order + 1 } : t,
+          );
+          return [...updatedPrevTasks, newTask];
+        });
+      }
 
       closeModal();
     } catch (error) {
-      console.error("Failed to save task and adjust orders", error);
+      console.error("Failed to save task", error);
+    }
+  };
+
+  const handleDeleteTask = async (task: Task) => {
+    try {
+      await deleteTask(task);
+
+      const tasksToShift = tasks.filter((t) => t.order > task.order);
+
+      const shiftPromises = tasksToShift.map((t) =>
+        storeTask({ ...t, order: t.order - 1 }),
+      );
+      await Promise.all(shiftPromises);
+
+      setTasks((prevTasks) => {
+        const remainingTasks = prevTasks.filter((t) => t.id !== task.id);
+
+        return remainingTasks.map((t) =>
+          t.order > task.order ? { ...t, order: t.order - 1 } : t,
+        );
+      });
+    } catch (error) {
+      console.error("Failed to delete a task and adjust orders", error);
     }
   };
 
@@ -84,6 +128,8 @@ function App() {
             tasks={sortedTasks}
             addTask={openModal}
             setToggledBtn={setToggledBtn}
+            deleteTask={handleDeleteTask}
+            openModal={openModal}
           />
         </main>
         <Footer />
@@ -97,7 +143,13 @@ function App() {
             <button className={styles.closeBtn} onClick={closeModal}>
               <img src={Cross} alt="close icon" />
             </button>
-            <TaskModal saveTask={handleSaveTask} order={toggledBtn} />
+            <TaskModal
+              saveTask={handleSaveTask}
+              order={toggledBtn}
+              title={title}
+              description={description}
+              id={id}
+            />
           </div>
         </div>
       )}

@@ -3,6 +3,9 @@
   background-color: var(--primary);
   height: 4rem;
   border: 3px solid var(--secondary);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .Heading {
@@ -13,4 +16,18 @@
 .Description {
   margin: 0;
   padding: 0;
+}
+
+.Delete {
+  background: none;
+  cursor: pointer;
+  border: none;
+}
+
+.Left,
+.Middle,
+.Right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
