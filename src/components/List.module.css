@@ -18,6 +18,10 @@
   overflow-y: auto;
 }
 
+.Scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .noTasks {
   display: flex;
   flex-direction: column;
@@ -36,6 +40,8 @@
   transition:
     max-height var(--transition),
     padding var(--transition);
+
+  flex-shrink: 0;
 }
 
 .Hidden {

@@ -18,6 +18,8 @@ function App() {
   const [description, setDescription] = useState("");
   const [id, setId] = useState("");
 
+  const [currentDrag, setCurrentDrag] = useState<number | null>(null);
+
   useEffect(() => {
     async function setup() {
       await initDB();
@@ -119,6 +121,51 @@ function App() {
     }
   };
 
+  const handleDragDrop = async (targetIndex: number) => {
+    if (currentDrag === null) return;
+
+    const oldOrder = currentDrag;
+
+    const newOrder = oldOrder < targetIndex ? targetIndex - 1 : targetIndex;
+
+    if (oldOrder === newOrder) {
+      setCurrentDrag(null);
+      return;
+    }
+
+    try {
+      const tasksToUpdate = tasks.map((t) => {
+        if (t.order === oldOrder) {
+          return { ...t, order: newOrder };
+        } else if (
+          oldOrder < newOrder &&
+          t.order > oldOrder &&
+          t.order <= newOrder
+        ) {
+          return { ...t, order: t.order - 1 };
+        } else if (
+          oldOrder > newOrder &&
+          t.order >= newOrder &&
+          t.order < oldOrder
+        ) {
+          return { ...t, order: t.order + 1 };
+        }
+        return t;
+      });
+
+      const changedTasks = tasksToUpdate.filter(
+        (t) => t.order !== tasks.find((old) => old.id === t.id)?.order,
+      );
+
+      await Promise.all(changedTasks.map((t) => storeTask(t)));
+
+      setTasks(tasksToUpdate);
+      setCurrentDrag(null);
+    } catch (error) {
+      console.error("Failed to reorder tasks during drop", error);
+    }
+  };
+
   return (
     <>
       <div className={styles.Content}>
@@ -130,6 +177,8 @@ function App() {
             setToggledBtn={setToggledBtn}
             deleteTask={handleDeleteTask}
             openModal={openModal}
+            setCurrentDrag={setCurrentDrag}
+            handleDragDrop={handleDragDrop}
           />
         </main>
         <Footer />

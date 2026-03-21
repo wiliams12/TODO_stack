@@ -9,13 +9,37 @@ interface Props {
   deleteTask: (task: Task) => void;
   openModal: (title: string, description: string, task: string) => void;
   setToggledBtn: (value: number) => void;
+  setCurrentDrag: (order: number | null) => void;
 }
 
-function Task({ task, deleteTask, openModal, setToggledBtn }: Props) {
+function Task({
+  task,
+  deleteTask,
+  openModal,
+  setToggledBtn,
+  setCurrentDrag,
+}: Props) {
   const [isDraggable, setIsDraggable] = useState(false);
 
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    setCurrentDrag(task.order);
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    setCurrentDrag(null);
+    setIsDragging(false);
+  };
+
   return (
-    <div className={styles.Wrapper} draggable={isDraggable}>
+    <div
+      className={`${styles.Wrapper} ${isDragging ? styles.Dragging : ""}`}
+      draggable={isDraggable}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className={styles.Left}>
         <button className={styles.Delete} onClick={() => deleteTask(task)}>
           <img src={Trash} alt="delete icon" draggable="false" />
