@@ -8,6 +8,7 @@ This project is a high-performance, offline-first task management application bu
 
 ## Functionality
 
+- **Progressive Web App (PWA):** Fully installable to your home screen or desktop. Utilizes a Service Worker to aggressively cache the application shell, guaranteeing instant load times and complete offline reliability.
 - **Custom Drag and Drop Reordering:** Smoothly rearrange tasks using a tailored HTML5 drag-and-drop implementation that mathematically calculates index shifts to prevent data overwriting.
 - **Contextual Task Insertion:** Hover between any two existing tasks to reveal hidden insertion points, allowing new items to be added exactly where they belong in the list.
 - **Full CRUD Capabilities:** Create, read, update, and delete tasks and detailed descriptions instantly via a modal interface.
