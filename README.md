@@ -1,12 +1,12 @@
-# TODO stack
+# 📝 TODO stack
 
 increase productivity by prioritising tasks in a visual way
 
-## About
+## 💡 About
 
 This project is a high-performance, offline-first task management application built with React and TypeScript. It focuses on delivering a seamless, native-feeling user experience with a custom-built drag-and-drop interface, smooth CSS animations, and responsive design. All data is persisted locally in the browser using IndexedDB, ensuring tasks are saved instantly and remain available without a network connection.
 
-## Functionality
+## ✨ Functionality
 
 - **Progressive Web App (PWA):** Fully installable to your home screen or desktop. Utilizes a Service Worker to aggressively cache the application shell, guaranteeing instant load times and complete offline reliability.
 - **Custom Drag and Drop Reordering:** Smoothly rearrange tasks using a tailored HTML5 drag-and-drop implementation that mathematically calculates index shifts to prevent data overwriting.
@@ -16,7 +16,7 @@ This project is a high-performance, offline-first task management application bu
 - **Touch-Screen Optimization:** Includes a toggleable UI state that permanently reveals hidden insertion buttons for users navigating with coarse touch pointers on mobile devices.
 - **Type-Safe Architecture:** Built strictly with TypeScript interfaces to eliminate runtime errors and ensure highly predictable data flow across the application.
 
-## How to use?
+## 🚀 How to use?
 
 1. Navigate to the src directory:
 
