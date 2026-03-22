@@ -8,9 +8,17 @@ interface Props {
   title: string;
   description: string;
   id: string;
+  setShowBtns: (value: boolean) => void;
 }
 
-function TaskModal({ saveTask, order, title, description, id }: Props) {
+function TaskModal({
+  saveTask,
+  order,
+  title,
+  description,
+  id,
+  setShowBtns,
+}: Props) {
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -23,6 +31,8 @@ function TaskModal({ saveTask, order, title, description, id }: Props) {
     };
 
     saveTask(newTask);
+
+    setShowBtns(false);
 
     e.currentTarget.reset();
   };

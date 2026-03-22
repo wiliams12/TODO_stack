@@ -49,11 +49,13 @@
   transition: opacity var(--transition);
 }
 
-.HiddenBtn:hover {
+.HiddenBtn:hover,
+.Show {
   max-height: 300px;
-  padding: 0.2rem 0;
+  padding: 0.6rem 0;
 }
 
-.HiddenBtn:hover .Hidden {
+.HiddenBtn:hover .Hidden,
+.Show .Hidden {
   opacity: 1;
 }

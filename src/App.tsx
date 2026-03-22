@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import List from "./components/List";
 import TaskModal from "./components/TaskModal";
 import Cross from "./assets/close.png";
+import Utilities from "./components/Utilities";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -19,6 +20,8 @@ function App() {
   const [id, setId] = useState("");
 
   const [currentDrag, setCurrentDrag] = useState<number | null>(null);
+
+  const [displayBtns, setDisplayBtns] = useState(false);
 
   useEffect(() => {
     async function setup() {
@@ -171,6 +174,7 @@ function App() {
       <div className={styles.Content}>
         <Header />
         <main>
+          <Utilities showButtons={displayBtns} setShowBtns={setDisplayBtns} />
           <List
             tasks={sortedTasks}
             addTask={openModal}
@@ -179,6 +183,7 @@ function App() {
             openModal={openModal}
             setCurrentDrag={setCurrentDrag}
             handleDragDrop={handleDragDrop}
+            showButtons={displayBtns}
           />
         </main>
         <Footer />
@@ -198,6 +203,7 @@ function App() {
               title={title}
               description={description}
               id={id}
+              setShowBtns={setDisplayBtns}
             />
           </div>
         </div>

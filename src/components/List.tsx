@@ -12,6 +12,7 @@ interface Props {
   openModal: (title: string, description: string, task: string) => void;
   setCurrentDrag: (order: number | null) => void;
   handleDragDrop: (targetIndex: number) => void;
+  showButtons: boolean;
 }
 
 function List({
@@ -22,6 +23,7 @@ function List({
   openModal,
   handleDragDrop,
   setCurrentDrag,
+  showButtons,
 }: Props) {
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
@@ -42,7 +44,7 @@ function List({
             {tasks.map((item, index) => (
               <React.Fragment key={item.id}>
                 <li
-                  className={`${styles.HiddenBtn} ${dragOverIndex === index ? styles.DragOver : ""}`}
+                  className={`${styles.HiddenBtn} ${dragOverIndex === index ? styles.DragOver : ""} ${showButtons ? styles.Show : ""}`}
                   onDragEnter={(e) => {
                     e.preventDefault();
                     setDragOverIndex(index);
@@ -77,7 +79,7 @@ function List({
             ))}
 
             <li
-              className={`${styles.HiddenBtn} ${dragOverIndex === tasks.length ? styles.DragOver : ""}`}
+              className={`${styles.HiddenBtn} ${dragOverIndex === tasks.length ? styles.DragOver : ""} ${showButtons ? styles.Show : ""}`}
               onDragEnter={(e) => {
                 e.preventDefault();
                 setDragOverIndex(tasks.length);
