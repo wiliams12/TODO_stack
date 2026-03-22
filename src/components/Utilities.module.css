@@ -1,7 +1,22 @@
 .showBtns,
 .Import,
 .Export {
-  height: 1.6rem;
+  background-color: var(--dark);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: var(--light);
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    background-color var(--transition);
+}
+
+.showBtns:hover,
+.Import:hover,
+.Export:hover {
+  transform: scale(1.2);
+  background-color: var(--primary);
 }
 
 .showBtns {
@@ -15,7 +30,6 @@
 }
 
 .Wrapper {
-  height: 2.4rem;
   background-color: var(--secondary);
   margin-bottom: 1rem;
   display: flex;
@@ -24,4 +38,5 @@
   padding: 0;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.4rem 0;
 }

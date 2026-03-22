@@ -17,54 +17,12 @@ function Footer() {
         &copy; 2026 Vilém Učík. All rights reserved.
       </p>
       <a
-        href="https://www.flaticon.com/free-icons/to-do-list"
-        title="to do list icons"
+        href="https://www.flaticon.com/"
+        title="flaticon"
         className={styles.Attribution}
       >
-        To do list icons created by Graphics Plazza - Flaticon
+        Icons provided by - Flaticon
       </a>
-      <div className={styles.Attribution}>
-        {" "}
-        Icons made by{" "}
-        <a
-          href="https://www.flaticon.com/authors/pixel-perfect"
-          title="Pixel perfect"
-        >
-          {" "}
-          Pixel perfect{" "}
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com'
-        </a>
-      </div>
-      <div className={styles.Attribution}>
-        {" "}
-        Icons made by{" "}
-        <a
-          href="https://www.flaticon.com/authors/royyan-wijaya"
-          title="Royyan Wijaya"
-        >
-          {" "}
-          Royyan Wijaya{" "}
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com'
-        </a>
-      </div>
-      <div className={styles.Attribution}>
-        {" "}
-        Icons made by{" "}
-        <a href="https://www.freepik.com" title="Freepik">
-          {" "}
-          Freepik{" "}
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com'
-        </a>
-      </div>
     </footer>
   );
 }
