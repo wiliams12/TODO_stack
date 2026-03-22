@@ -37,6 +37,10 @@ npm run dev
 - ⚛️ **React.js**
 - 🗄️ **IndexedDB**
 
+## ❗️ Important notice
+
+The app is not yet optimised for touch screens
+
 ## ⚖️ License
 
 This project is open-source and available under the [MIT License](LICENCE).
