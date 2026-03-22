@@ -2,6 +2,8 @@
 
 increase productivity by prioritising tasks in a visual way
 
+The site is currently deployed [here](https://todo-stack-00.netlify.app)
+
 ## 💡 About
 
 This project is a high-performance, offline-first task management application built with React and TypeScript. It focuses on delivering a seamless, native-feeling user experience with a custom-built drag-and-drop interface, smooth CSS animations, and responsive design. All data is persisted locally in the browser using IndexedDB, ensuring tasks are saved instantly and remain available without a network connection.
